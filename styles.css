@@ -2,44 +2,41 @@
   --bg: #000; --fg: #fff;
   --sec-bg: #262626; --sec-fg: #bbb;
   --accent: #0095f6;
+  --danger: #ff4956;
 }
 body.light-mode {
   --bg: #fff; --fg: #000;
   --sec-bg: #f5f5f5; --sec-fg: #666;
   --accent: #0095f6;
+  --danger: #ff4956;
 }
 html, body {
   margin:0; padding:0;
   background:var(--bg); color:var(--fg);
   height:100vh; width:100vw;
-  overflow: hidden;
+  overflow:hidden;
 }
 body {
   font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
-  min-height:100vh; min-width:100vw;
-  overflow: hidden;
+  width:100vw; height:100vh;
+  overflow:hidden;
 }
 .container {
+  max-width:414px; height:100vh;
+  margin:0 auto; display:flex; flex-direction:column;
+  background:var(--bg); position:relative;
   width:100vw;
-  max-width:414px;
-  min-height:100vh;
-  margin:0 auto;
-  display:flex;
-  flex-direction:column;
-  background:var(--bg);
 }
-.content-area {
+.main-scroll-area {
   flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  max-width: 414px;
-  margin: 0 auto;
-  overflow: auto;
+  overflow-y: auto;
+  height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 70px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-.content-area::-webkit-scrollbar { display: none; }
+.main-scroll-area::-webkit-scrollbar { display: none; }
 
 .header { padding:16px; }
 .profile-nav { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
@@ -63,7 +60,6 @@ body {
 .feed-nav { display:flex; justify-content:space-around; border-top:1px solid var(--sec-bg); padding-top:12px;}
 .feed-btn { background:none; border:none; color:var(--fg); font-size:20px; filter:grayscale(1); cursor:pointer; }
 
-/* 피드: 1줄만 기본 보이고, 아래로 추가, 항상 정사각형 */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -97,17 +93,29 @@ body {
 }
 .drop-zone.dragover { outline:2px dashed var(--accent); }
 
-/* 메뉴바: 피드박스 바로 아래에서 sticky로 상단고정, 스크롤 안 됨 */
 .bottom-nav {
-  width: 100%;
-  max-width: 414px;
-  height: 60px;
-  background: var(--bg);
-  display: flex; justify-content: space-around; align-items: center;
-  border-top: 1px solid var(--sec-bg);
-  position: sticky;
-  top: 0;
-  left: 0;
-  z-index: 100;
+  height:60px; background:var(--bg);
+  display:flex; justify-content:space-around; align-items:center; border-top:1px solid var(--sec-bg);
+  width:100%;
+  position:fixed; left:0; right:0; bottom:0;
+  z-index:100;
+  max-width:414px;
+  margin:0 auto;
 }
 .nav-btn { background:none; border:none; font-size:24px; color:var(--fg); filter:grayscale(1); cursor:pointer; }
+.danger { color: var(--danger); }
+.spacer { height: 60px; }
+#delete-cell {
+  background:none;
+  color:var(--danger);
+  border:none;
+  font-size:24px;
+  filter:grayscale(1);
+  cursor:pointer;
+  outline: none;
+}
+#delete-cell.active {
+  background:var(--danger);
+  color:#fff;
+  border-radius:50%;
+}
