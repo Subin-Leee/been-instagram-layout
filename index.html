@@ -8,19 +8,19 @@
 </head>
 <body>
   <div class="container">
-    <div class="content-area">
+    <div class="main-scroll-area">
       <div class="header">
         <div class="profile-nav">
           <div class="username">ssooob_b ▾<span class="notif-dot"></span></div>
           <div class="nav-icons">
-            <button class="icon-btn">🕒</button>
-            <button class="icon-btn">📶</button>
+            <button class="icon-btn">⌘</button>
+            <button class="icon-btn">⏚</button>
             <button class="icon-btn">☰</button>
           </div>
         </div>
         <div class="profile-main">
           <div class="profile-pic drop-zone" id="profile-pic">
-            <div class="placeholder">프로필<br>드래그</div>
+            <div class="placeholder">프로필<br>클릭 추가</div>
           </div>
           <div class="stats">
             <div class="stat"><div class="num">417</div><div class="label">게시물</div></div>
@@ -43,22 +43,23 @@
           <button class="action-btn">연락하기</button>
         </div>
         <div class="feed-nav">
-          <button class="feed-btn">🏠</button>
-          <button class="feed-btn">🔍</button>
+          <button class="feed-btn">🛖</button>
+          <button class="feed-btn">♾️</button>
           <button class="feed-btn">➕</button>
           <button class="feed-btn">🎥</button>
           <button class="feed-btn">👤</button>
         </div>
       </div>
-      <!-- 피드(1줄 기본, 아래로 추가 가능) -->
       <div class="grid-container" id="grid"></div>
-      <!-- 메뉴바: 피드 바로 아래, sticky로 고정 -->
-      <div class="bottom-nav">
-        <button id="add-cell" class="nav-btn">＋</button>
-        <button id="theme-toggle" class="nav-btn">🌙</button>
-      </div>
+      <div class="spacer"></div> <!-- 메뉴바 높이만큼 여백(아래 겹침 방지) -->
     </div>
-  <script src="script.js"></script>
+    <!-- 항상 화면 하단 고정 -->
+    <div class="bottom-nav" id="bottom-nav">
+      <button id="add-cell" class="nav-btn">＋</button>
+      <button id="delete-cell" class="nav-btn danger">－</button>
+      <button id="theme-toggle" class="nav-btn">🌙</button>
+    </div>
   </div>
+  <script src="script.js"></script>
 </body>
 </html>
