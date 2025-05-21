@@ -8,8 +8,9 @@
 </head>
 <body>
   <div class="container">
-    <div class="main-scroll-area">
+    <div class="main-scroll-area" id="scroll-area">
       <div class="header">
+        <!-- ...(생략: 기존 구조 그대로)... -->
         <div class="profile-nav">
           <div class="username">ssooob_b ▾<span class="notif-dot"></span></div>
           <div class="nav-icons">
@@ -43,7 +44,7 @@
           <button class="action-btn">연락하기</button>
         </div>
         <div class="feed-nav">
-          <button class="feed-btn">🛖</button>
+          <button class="feed-btn">🔝</button>
           <button class="feed-btn">♾️</button>
           <button class="feed-btn">➕</button>
           <button class="feed-btn">🎥</button>
@@ -51,15 +52,18 @@
         </div>
       </div>
       <div class="grid-container" id="grid"></div>
-      <div class="spacer"></div> <!-- 메뉴바 높이만큼 여백(아래 겹침 방지) -->
+      <!-- sticky 메뉴바와 겹치지 않게 여유 공간 -->
+      <div style="height:70px"></div>
     </div>
-    <!-- 항상 화면 하단 고정 -->
+    <!-- 피드 바로 아래 sticky로 고정되는 메뉴바 -->
     <div class="bottom-nav" id="bottom-nav">
       <button id="add-cell" class="nav-btn">＋</button>
-      <button id="delete-cell" class="nav-btn danger">－</button>
-      <button id="theme-toggle" class="nav-btn">🌙</button>
+      <button id="delete-cell" class="nav-btn delete-btn">−</button>
+       <button id="theme-toggle" class="nav-btn">🌙</button>
     </div>
+    <!-- 삭제영역(숨겨져있다가 드래그하면 강조) -->
+    <div id="delete-dropzone" class="delete-dropzone">여기로 드래그하면 삭제</div>
+    <script src="script.js"></script>
   </div>
-  <script src="script.js"></script>
 </body>
 </html>
