@@ -2,13 +2,15 @@
   --bg: #000; --fg: #fff;
   --sec-bg: #262626; --sec-fg: #bbb;
   --accent: #0095f6;
-  --danger: #ff4956;
+  --del-bg: #e53a40;
+  --del-fg: #fff;
 }
 body.light-mode {
   --bg: #fff; --fg: #000;
   --sec-bg: #f5f5f5; --sec-fg: #666;
   --accent: #0095f6;
-  --danger: #ff4956;
+  --del-bg: #ffe3e3;
+  --del-fg: #d00;
 }
 html, body {
   margin:0; padding:0;
@@ -25,19 +27,17 @@ body {
   max-width:414px; height:100vh;
   margin:0 auto; display:flex; flex-direction:column;
   background:var(--bg); position:relative;
-  width:100vw;
 }
 .main-scroll-area {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  height: 100vh;
-  box-sizing: border-box;
-  padding-bottom: 70px;
+  flex:1 1 auto;
+  overflow-y:auto;
+  height:100vh;
+  box-sizing:border-box;
+  padding-bottom:70px; /* 메뉴바 가림 방지 */
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 .main-scroll-area::-webkit-scrollbar { display: none; }
-
 .header { padding:16px; }
 .profile-nav { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
 .username { font-size:18px; font-weight:600; }
@@ -60,6 +60,7 @@ body {
 .feed-nav { display:flex; justify-content:space-around; border-top:1px solid var(--sec-bg); padding-top:12px;}
 .feed-btn { background:none; border:none; color:var(--fg); font-size:20px; filter:grayscale(1); cursor:pointer; }
 
+/* 피드박스: 항상 1:1비율, 한 줄부터 아래로 계속 쌓임 */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -75,6 +76,7 @@ body {
   overflow: hidden;
   cursor: move;
   user-select: none;
+  transition: opacity 0.2s;
 }
 .grid-item img {
   position: absolute;
@@ -97,25 +99,29 @@ body {
   height:60px; background:var(--bg);
   display:flex; justify-content:space-around; align-items:center; border-top:1px solid var(--sec-bg);
   width:100%;
-  position:fixed; left:0; right:0; bottom:0;
+  position:sticky; bottom:0; left:0; right:0;
   z-index:100;
   max-width:414px;
   margin:0 auto;
 }
 .nav-btn { background:none; border:none; font-size:24px; color:var(--fg); filter:grayscale(1); cursor:pointer; }
-.danger { color: var(--danger); }
+.delete-btn { color: var(--del-bg); font-weight: bold; }
 .spacer { height: 60px; }
-#delete-cell {
-  background:none;
-  color:var(--danger);
-  border:none;
-  font-size:24px;
-  filter:grayscale(1);
-  cursor:pointer;
-  outline: none;
+
+/* 삭제 드롭존 */
+.delete-dropzone {
+  position: fixed;
+  left: 50%; bottom: 90px;
+  transform: translateX(-50%);
+  width: 220px; height: 44px;
+  background: var(--del-bg);
+  color: var(--del-fg);
+  border-radius: 22px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; font-weight: bold; letter-spacing: 2px;
+  opacity: 0; pointer-events: none; z-index: 999;
+  transition: opacity 0.3s, background 0.2s;
 }
-#delete-cell.active {
-  background:var(--danger);
-  color:#fff;
-  border-radius:50%;
+.delete-dropzone.active {
+  opacity: 1;
 }
