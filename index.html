@@ -4,64 +4,61 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Instagram Feed Preview</title>
-  <!-- CSS 패널에서 작성한 styles.css 불러오기 -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
-    <div class="header">
-      <div class="profile-nav">
-        <div class="username">ssooob_b ▾<span class="notif-dot"></span></div>
-        <div class="nav-icons">
-          <button class="icon-btn">🕒</button>
-          <button class="icon-btn">📶</button>
-          <button class="icon-btn">☰</button>
+    <div class="content-area">
+      <div class="header">
+        <div class="profile-nav">
+          <div class="username">ssooob_b ▾<span class="notif-dot"></span></div>
+          <div class="nav-icons">
+            <button class="icon-btn">🕒</button>
+            <button class="icon-btn">📶</button>
+            <button class="icon-btn">☰</button>
+          </div>
+        </div>
+        <div class="profile-main">
+          <div class="profile-pic drop-zone" id="profile-pic">
+            <div class="placeholder">프로필<br>드래그</div>
+          </div>
+          <div class="stats">
+            <div class="stat"><div class="num">417</div><div class="label">게시물</div></div>
+            <div class="stat"><div class="num">1,354</div><div class="label">팔로워</div></div>
+            <div class="stat"><div class="num">1,010</div><div class="label">팔로잉</div></div>
+          </div>
+        </div>
+        <div class="profile-bio">
+          <div class="name">Stylist 이수빈</div>
+          <div class="desc">Visual Directing / Styling / Set&amp;Props</div>
+          <div class="translate">번역 보기</div>
+        </div>
+        <div class="dashboard">
+          <div class="dashboard-title">프로페셔널 대시보드</div>
+          <div class="dashboard-sub">최근 30일간 조회 4.1천회.</div>
+        </div>
+        <div class="action-buttons">
+          <button class="action-btn">프로필 편집</button>
+          <button class="action-btn">프로필 공유</button>
+          <button class="action-btn">연락하기</button>
+        </div>
+        <div class="feed-nav">
+          <button class="feed-btn">🏠</button>
+          <button class="feed-btn">🔍</button>
+          <button class="feed-btn">➕</button>
+          <button class="feed-btn">🎥</button>
+          <button class="feed-btn">👤</button>
         </div>
       </div>
-      <div class="profile-main">
-        <div class="profile-pic drop-zone" id="profile-pic">
-          <div class="placeholder">프로필<br>드래그</div>
-        </div>
-        <div class="stats">
-          <div class="stat"><div class="num">417</div><div class="label">게시물</div></div>
-          <div class="stat"><div class="num">1,354</div><div class="label">팔로워</div></div>
-          <div class="stat"><div class="num">1,010</div><div class="label">팔로잉</div></div>
-        </div>
-      </div>
-      <div class="profile-bio">
-        <div class="name">Stylist 이수빈</div>
-        <div class="desc">Visual Directing / Styling / Set&amp;Props</div>
-        <div class="translate">번역 보기</div>
-      </div>
-      <div class="dashboard">
-        <div class="dashboard-title">프로페셔널 대시보드</div>
-        <div class="dashboard-sub">최근 30일간 조회 4.1천회.</div>
-      </div>
-      <div class="action-buttons">
-        <button class="action-btn">프로필 편집</button>
-        <button class="action-btn">프로필 공유</button>
-        <button class="action-btn">연락하기</button>
-      </div>
-      <div class="feed-nav">
-        <button class="feed-btn">🏠</button>
-        <button class="feed-btn">🔍</button>
-        <button class="feed-btn">➕</button>
-        <button class="feed-btn">🎥</button>
-        <button class="feed-btn">👤</button>
+      <!-- 피드(1줄 기본, 아래로 추가 가능) -->
+      <div class="grid-container" id="grid"></div>
+      <!-- 메뉴바: 피드 바로 아래, sticky로 고정 -->
+      <div class="bottom-nav">
+        <button id="add-cell" class="nav-btn">＋</button>
+        <button id="theme-toggle" class="nav-btn">🌙</button>
       </div>
     </div>
-
-    <!-- 피드 그리드: 한 화면에 3줄만 보이고, 이후 스크롤 -->
-    <div class="grid-container" id="grid"></div>
-
-    <!-- 하단 메뉴바 (고정) -->
-    <div class="bottom-nav">
-      <button id="add-cell" class="nav-btn">＋</button>
-      <button id="theme-toggle" class="nav-btn">🌙</button>
-    </div>
-  </div>
-
-  <!-- JS 패널에서 작성한 script.js 불러오기 -->
   <script src="script.js"></script>
+  </div>
 </body>
 </html>
