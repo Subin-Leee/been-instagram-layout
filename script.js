@@ -1,127 +1,127 @@
-:root {
-  --bg: #000; --fg: #fff;
-  --sec-bg: #262626; --sec-fg: #bbb;
-  --accent: #0095f6;
-  --del-bg: #e53a40;
-  --del-fg: #fff;
+// 피드 초기 3칸(1줄)
+const grid = document.getElementById('grid');
+for (let i = 0; i < 3; i++) {
+  grid.appendChild(createGridItem());
 }
-body.light-mode {
-  --bg: #fff; --fg: #000;
-  --sec-bg: #f5f5f5; --sec-fg: #666;
-  --accent: #0095f6;
-  --del-bg: #ffe3e3;
-  --del-fg: #d00;
-}
-html, body {
-  margin:0; padding:0;
-  background:var(--bg); color:var(--fg);
-  height:100vh; width:100vw;
-  overflow:hidden;
-}
-body {
-  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
-  width:100vw; height:100vh;
-  overflow:hidden;
-}
-.container {
-  max-width:414px; height:100vh;
-  margin:0 auto; display:flex; flex-direction:column;
-  background:var(--bg); position:relative;
-}
-.main-scroll-area {
-  flex:1 1 auto;
-  overflow-y:auto;
-  height:100vh;
-  box-sizing:border-box;
-  padding-bottom:70px; /* 메뉴바 가림 방지 */
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.main-scroll-area::-webkit-scrollbar { display: none; }
-.header { padding:16px; }
-.profile-nav { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
-.username { font-size:18px; font-weight:600; }
-.notif-dot { display:inline-block; width:8px; height:8px; background:#ed4956; border-radius:50%; margin-left:4px; vertical-align:middle; }
-.nav-icons .icon-btn { background:none; border:none; color:var(--fg); font-size:20px; margin-left:12px; filter:grayscale(1); cursor:pointer; }
-.profile-main { display:flex; align-items:center; margin-bottom:12px; }
-.profile-pic { width:100px; height:100px; border-radius:50%; background:var(--sec-bg); position:relative; overflow:hidden; cursor:pointer; flex-shrink:0; display:flex; align-items:center; justify-content:center;}
-.profile-pic .placeholder { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; font-size:12px; color:var(--sec-fg); line-height:1.2;}
-.stats { display:flex; flex:1; justify-content:space-around;}
-.stat .num { font-size:18px; font-weight:600; color:var(--fg); text-align:center;}
-.stat .label { font-size:12px; color:var(--sec-fg); text-align:center;}
-.profile-bio .name { font-size:16px; font-weight:600; }
-.profile-bio .desc { font-size:14px; margin-top:4px; }
-.profile-bio .translate { font-size:12px; color:var(--accent); margin-top:4px;}
-.dashboard { background:var(--sec-bg); border-radius:8px; padding:10px 12px; margin:12px 0; }
-.dashboard-title { font-size:14px; font-weight:600; }
-.dashboard-sub { font-size:12px; color:var(--sec-fg); margin-top:2px; }
-.action-buttons { display:flex; gap:8px; margin-bottom:12px; }
-.action-btn { flex:1; padding:8px 0; font-size:14px; background:var(--sec-bg); border:none; border-radius:6px; color:var(--fg); cursor:pointer; }
-.feed-nav { display:flex; justify-content:space-around; border-top:1px solid var(--sec-bg); padding-top:12px;}
-.feed-btn { background:none; border:none; color:var(--fg); font-size:20px; filter:grayscale(1); cursor:pointer; }
 
-/* 피드박스: 항상 1:1비율, 한 줄부터 아래로 계속 쌓임 */
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  width: 100%;
-  background: var(--bg);
-}
-.grid-item {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  background: var(--sec-bg);
-  overflow: hidden;
-  cursor: move;
-  user-select: none;
-  transition: opacity 0.2s;
-}
-.grid-item img {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center;
-  aspect-ratio: 1 / 1;
-}
-.grid-item .placeholder {
-  position: absolute;
-  top: 50%; left: 50%; transform: translate(-50%, -50%);
-  text-align: center; font-size: 12px;
-  color: var(--sec-fg); line-height: 1.2;
-  width: 100%;
-}
-.drop-zone.dragover { outline:2px dashed var(--accent); }
+// 한 칸 추가
+document.getElementById('add-cell').addEventListener('click', () => {
+  grid.appendChild(createGridItem());
+});
 
-.bottom-nav {
-  height:60px; background:var(--bg);
-  display:flex; justify-content:space-around; align-items:center; border-top:1px solid var(--sec-bg);
-  width:100%;
-  position:sticky; bottom:0; left:0; right:0;
-  z-index:100;
-  max-width:414px;
-  margin:0 auto;
-}
-.nav-btn { background:none; border:none; font-size:24px; color:var(--fg); filter:grayscale(1); cursor:pointer; }
-.delete-btn { color: var(--del-bg); font-weight: bold; }
-.spacer { height: 60px; }
+// 프로필: 클릭(추가), 더블클릭(삭제)
+const profilePic = document.getElementById('profile-pic');
+profilePic.addEventListener('click', () => {
+  if (!profilePic.querySelector('img')) {
+    currentTarget = profilePic;
+    fileInput.click();
+  }
+});
+profilePic.addEventListener('dblclick', () => {
+  if (profilePic.querySelector('img')) resetZone(profilePic);
+});
 
-/* 삭제 드롭존 */
-.delete-dropzone {
-  position: fixed;
-  left: 50%; bottom: 90px;
-  transform: translateX(-50%);
-  width: 220px; height: 44px;
-  background: var(--del-bg);
-  color: var(--del-fg);
-  border-radius: 22px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 17px; font-weight: bold; letter-spacing: 2px;
-  opacity: 0; pointer-events: none; z-index: 999;
-  transition: opacity 0.3s, background 0.2s;
+// 파일 입력 엘리먼트(공용)
+let currentTarget = null;
+const fileInput = document.createElement('input');
+fileInput.type = 'file';
+fileInput.accept = 'image/*';
+fileInput.style.display = 'none';
+document.body.appendChild(fileInput);
+fileInput.addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  renderImage(currentTarget, URL.createObjectURL(file));
+  fileInput.value = '';
+});
+
+// 삭제 드롭존(메뉴바 - 버튼)
+const deleteDropzone = document.getElementById('delete-dropzone');
+const deleteBtn = document.getElementById('delete-cell');
+
+// 피드 아이템 생성 함수
+function createGridItem() {
+  const item = document.createElement('div');
+  item.className = 'grid-item drop-zone';
+  item.draggable = true;
+
+  const ph = document.createElement('div');
+  ph.className = 'placeholder';
+  ph.innerHTML = '사진<br>드래그<br>또는 클릭';
+  item.appendChild(ph);
+
+  enableInt(item);
+  return item;
 }
-.delete-dropzone.active {
-  opacity: 1;
+
+// 피드/프로필 드래그&삭제, 클릭추가/더블클릭삭제
+function enableInt(el) {
+  // 드래그&드롭 이미지, -버튼 드래그 삭제
+  el.addEventListener('dragstart', () => {
+    el.classList.add('dragging');
+    deleteDropzone.classList.add('active');
+    setTimeout(() => el.style.opacity = "0.5", 0);
+  });
+  el.addEventListener('dragend', (e) => {
+    el.classList.remove('dragging');
+    deleteDropzone.classList.remove('active');
+    el.style.opacity = "";
+  });
+  el.addEventListener('dragover', e => { e.preventDefault(); el.classList.add('dragover'); });
+  el.addEventListener('dragleave', () => el.classList.remove('dragover'));
+  el.addEventListener('drop', e => {
+    e.preventDefault(); el.classList.remove('dragover');
+    const f = e.dataTransfer.files[0];
+    if (f && f.type.startsWith('image/')) renderImage(el, URL.createObjectURL(f));
+  });
+  // 클릭(추가)
+  el.addEventListener('click', () => {
+    if (el.querySelector('img')) return;
+    currentTarget = el;
+    fileInput.click();
+  });
+  // 더블클릭(삭제)
+  el.addEventListener('dblclick', () => {
+    if (el.querySelector('img')) resetZone(el);
+  });
 }
+
+// -버튼(삭제 영역) 드래그로 삭제
+deleteDropzone.addEventListener('dragover', e => {
+  e.preventDefault();
+  deleteDropzone.style.background = "var(--del-bg)";
+});
+deleteDropzone.addEventListener('dragleave', e => {
+  deleteDropzone.style.background = "var(--del-bg)";
+});
+deleteDropzone.addEventListener('drop', e => {
+  e.preventDefault();
+  // 삭제할 엘 찾기
+  const dragging = document.querySelector('.grid-item.dragging');
+  if (dragging) dragging.remove();
+  deleteDropzone.classList.remove('active');
+  deleteDropzone.style.background = "var(--del-bg)";
+});
+// -버튼(클릭시 삭제모드 안내)
+deleteBtn.addEventListener('click', () => {
+  deleteDropzone.classList.add('active');
+  setTimeout(() => deleteDropzone.classList.remove('active'), 1500);
+});
+
+// 이미지 렌더/리셋
+function renderImage(ct, src) {
+  ct.innerHTML = '';
+  const img = document.createElement('img'); img.src = src; ct.appendChild(img);
+}
+function resetZone(ct) {
+  ct.innerHTML = '';
+  const ph = document.createElement('div'); ph.className = 'placeholder';
+  ph.innerHTML = '사진<br>드래그<br>또는 클릭'; ct.appendChild(ph);
+}
+
+// 라이트/다크모드
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
+  document.getElementById('theme-toggle').textContent =
+    document.body.classList.contains('light-mode') ? '🌞' : '🌙';
+});
